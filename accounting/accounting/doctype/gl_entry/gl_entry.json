@@ -9,7 +9,8 @@
   "debit",
   "credit",
   "voucher_no",
-  "voucher_type"
+  "voucher_type",
+  "remarks"
  ],
  "fields": [
   {
@@ -45,11 +46,16 @@
    "fieldtype": "Link",
    "label": "Voucher Type",
    "options": "DocType"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Data",
+   "label": "Remarks"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-04-21 17:42:26.575464",
+ "modified": "2021-05-10 19:32:19.651247",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "GL Entry",

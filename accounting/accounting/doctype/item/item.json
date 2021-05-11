@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_rename": 1,
  "autoname": "field:item_name",
  "creation": "2021-04-20 17:22:00.809976",
@@ -9,12 +10,12 @@
  "engine": "InnoDB",
  "field_order": [
   "item_name",
-  "column_break_3",
   "price",
   "image",
   "section_break_6",
   "brand",
-  "description"
+  "description",
+  "route"
  ],
  "fields": [
   {
@@ -39,10 +40,6 @@
    "label": "Description"
   },
   {
-   "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "section_break_6",
    "fieldtype": "Section Break",
    "label": "Description"
@@ -58,14 +55,20 @@
    "in_list_view": 1,
    "label": "Price",
    "reqd": 1
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
   }
  ],
+ "has_web_view": 1,
  "icon": "fa fa-tag",
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
  "max_attachments": 1,
- "modified": "2021-04-26 13:02:05.951731",
+ "modified": "2021-04-29 16:10:33.092618",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
@@ -85,6 +88,7 @@
   }
  ],
  "quick_entry": 1,
+ "route": "item",
  "sort_field": "modified",
  "sort_order": "DESC",
  "title_field": "item_name",

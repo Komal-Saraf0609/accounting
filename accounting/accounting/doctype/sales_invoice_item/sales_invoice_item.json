@@ -6,7 +6,8 @@
  "engine": "InnoDB",
  "field_order": [
   "item",
-  "quantity"
+  "quantity",
+  "amount"
  ],
  "fields": [
   {
@@ -18,18 +19,23 @@
    "reqd": 1
   },
   {
-   "default": "1",
    "fieldname": "quantity",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Quantity",
    "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-04-22 11:07:25.080485",
+ "modified": "2021-05-10 16:31:00.158964",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice Item",

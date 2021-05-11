@@ -1,0 +1,35 @@
+
+<h1 align="right">Sales Invoice</h1>
+<h2 align="right">{{doc.name}}</h2>
+<b align="right">{{frappe.format_date(doc.modified)}}</b>
+<h5 align="right">Customer Name: {{doc.customer}}</h5>
+<table width="100%">
+	<thead>
+		<th>Sl No.</th>
+		<th>Item</th>
+		<th>Qty</th>
+		<th>Price</th>
+	</thead>
+
+	<tbody>
+		{% set ns = namespace(total=0) %}
+		{% for item in doc.item %}
+		<tr>
+			<td>{{item.idx}}</td>
+			<td>{{item.item}}</td>
+			{% set item_doc = frappe.get_doc("Item", item.item) %}
+			<td>{{item.quantity}}</td>
+			{% set cost_of_item = item.quantity * item_doc.price %}
+			{% set ns.total = ns.total + cost_of_item %}
+			<td>{{cost_of_item}}</td>
+		</tr>
+		{% endfor%}
+	</tbody>
+
+	<tfoot>
+		<tr>
+			<td colspan="3" align="right"><strong>Total</strong></td>
+			<td>{{ns.total}}</td>
+		</tr>
+	</tfoot>
+</table>

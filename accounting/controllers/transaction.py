@@ -21,6 +21,18 @@ class Transaction(Document):
 			voucher_no=self.name
 		).insert()
 
+	def _make_reverse_gl_entry(self, account: str, debit: float = 0, credit: float = 0):
+		"""Make GL Entry for today with voucher info."""
+		frappe.get_doc(
+			doctype="GL Entry",
+			posting_date=date.today(),
+			account=account,
+			debit=credit,
+			credit=debit,
+			voucher_type=self.doctype,
+			voucher_no=self.name
+		).insert()
+
 	def _make_gl_entries(self, amount: float):
 		try:
 			self._make_gl_entry(self.debit_account, debit=amount)
@@ -28,5 +40,18 @@ class Transaction(Document):
 		except frappe.exceptions.ValidationError:
 			frappe.db.rollback()
 
+	def _make_reverse_gl_entries(self, amount: float):
+		try:
+			self._make_reverse_gl_entry(self.debit_account, credit=amount)
+			self._make_reverse_gl_entry(self.credit_account, debit=amount)
+		except frappe.exceptions.ValidationError:
+			frappe.db.rollback()
+
 	def on_submit(self):
 		self._make_gl_entries(self.amount)
+
+	def on_cancel(self):
+		self._make_reverse_gl_entries(self.amount)
+
+
+
