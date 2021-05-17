@@ -10,19 +10,22 @@ from frappe import _
 from datetime import date
 
 class JournalEntry(Document):
+
 	def _check_for_balanced_entries(self):
 		debit_sum = 0
 		credit_sum = 0
 		for entry in self.accounts:
 			debit_sum += entry.debit
 			credit_sum += entry.credit
+			self.total_credit = credit_sum
+			self.total_debit = debit_sum
 		if debit_sum != credit_sum:
 			frappe.throw(
 				msg=_(
 					"Total credits don't equal debits. Make them equal and try again."
-				),
-				exc=frappe.exceptions.LinkValidationError,
+				)
 			)
+
 
 	def before_submit(self):
 		self._check_for_balanced_entries()
@@ -39,15 +42,6 @@ class JournalEntry(Document):
 			voucher_no=self.name
 		).insert()
 
-	def _make_gl_entries(self, amount: float):
-		try:
-			self._make_gl_entry(self.debit_account, debit=amount)
-			self._make_gl_entry(self.credit_account, credit=amount)
-		except frappe.exceptions.ValidationError:
-			frappe.db.rollback()
-
-	def on_submit(self):
-		self._make_gl_entries(self.amount)
 
 	def _make_gl_entries_for_accounts(self):
 		for entry in self.accounts:

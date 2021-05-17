@@ -11,14 +11,18 @@ class SalesInvoice(Transaction):
 
 	def validate(self):
 		self.validate_date()
+		self.validate_amount()
 
 	def validate_date(self):
 		date = today()
-		self.total_price = 0
-		self.sales_invoice_total_quantity = 0
 		#frappe.throw(date)
 		if not self.posting_date >= date:
 			frappe.throw("Posting Date should be greater than or equal to today's date")
+
+		
+	def validate_amount(self):
+		self.total_price = 0
+		self.sales_invoice_total_quantity = 0
 		for sales_invoice_item in self.item:
 			item = frappe.get_doc("Item", sales_invoice_item.item)
 			self.amount = item.price * sales_invoice_item.quantity

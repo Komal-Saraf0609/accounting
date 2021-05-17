@@ -7,7 +7,11 @@
  "field_order": [
   "posting_date",
   "accounts",
-  "amended_from"
+  "amended_from",
+  "section_break_4",
+  "total_credit",
+  "column_break_6",
+  "total_debit"
  ],
  "fields": [
   {
@@ -41,12 +45,30 @@
    "options": "Journal Entry",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "total_credit",
+   "fieldtype": "Currency",
+   "label": "Total Credit"
+  },
+  {
+   "fieldname": "total_debit",
+   "fieldtype": "Currency",
+   "label": "Total Debit"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-04-22 11:13:12.650079",
+ "modified": "2021-05-11 18:20:06.304360",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Journal Entry",

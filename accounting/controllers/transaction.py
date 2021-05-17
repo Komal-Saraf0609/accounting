@@ -7,10 +7,9 @@ from frappe.model.document import Document
 
 
 class Transaction(Document):
-	"""Generic controller for double entry transactions."""
+
 
 	def _make_gl_entry(self, account: str, debit: float = 0, credit: float = 0):
-		"""Make GL Entry for today with voucher info."""
 		frappe.get_doc(
 			doctype="GL Entry",
 			posting_date=date.today(),
@@ -22,7 +21,6 @@ class Transaction(Document):
 		).insert()
 
 	def _make_reverse_gl_entry(self, account: str, debit: float = 0, credit: float = 0):
-		"""Make GL Entry for today with voucher info."""
 		frappe.get_doc(
 			doctype="GL Entry",
 			posting_date=date.today(),
